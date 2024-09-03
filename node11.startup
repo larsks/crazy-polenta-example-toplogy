@@ -1,0 +1,10 @@
+# connect device eth0 to network "lan2"
+ip addr add 192.168.20.202/24 dev eth0
+
+# routes
+ip route add default via 192.168.20.1
+
+# common startup commands
+cat /shared/hosts >> /etc/hosts
+echo 100.64.64.100 remotehost >> /etc/hosts
+

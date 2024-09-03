@@ -1,0 +1,17 @@
+100.64.64.100 remotehost-eth0
+111.11.111.1 isprouter111-eth0
+100.64.64.11 isprouter111-eth1
+222.22.222.9 isprouter222-eth0
+100.64.64.22 isprouter222-eth1
+111.11.111.2 router-eth0
+111.11.111.11 router-eth0
+111.11.111.12 router-eth0
+222.22.222.10 router-eth1
+222.22.222.11 router-eth1
+222.22.222.12 router-eth1
+192.168.10.1 router-eth2
+192.168.20.1 router-eth3
+192.168.10.101 node00-eth0
+192.168.10.102 node01-eth0
+192.168.20.201 node10-eth0
+192.168.20.202 node11-eth0

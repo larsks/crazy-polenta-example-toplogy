@@ -2,20 +2,21 @@ metadata:
   description: https://serverfault.com/questions/1164687/using-multiple-tables-to-route-ips-from-two-isps
 
 networks:
-  ext0:
+  wan1:
     cidr: 111.11.111.0/28
-  ext1:
+  wan2:
     cidr: 222.22.222.8/29
   internet:
     cidr: 100.64.64.0/24
-  int0:
+  lan1:
     cidr: 192.168.10.0/24
-  int1:
+  lan2:
     cidr: 192.168.20.0/24
 
 common:
   startup: |
     cat /shared/hosts >> /etc/hosts
+    echo 100.64.64.100 remotehost >> /etc/hosts
 
 hosts:
   remotehost:
@@ -28,7 +29,7 @@ hosts:
       ip route add 222.22.222.8/29 via 100.64.64.22
   isprouter111:
     interfaces:
-    - network: ext0
+    - network: wan1
       address:
       - 111.11.111.1
     - network: internet
@@ -36,7 +37,7 @@ hosts:
       - 100.64.64.11
   isprouter222:
     interfaces:
-    - network: ext1
+    - network: wan2
       address:
       - 222.22.222.9
     - network: internet
@@ -45,20 +46,20 @@ hosts:
   router:
     autogateway: false
     interfaces:
-      - network: ext0
+      - network: wan1
         address:
         - 111.11.111.2
         - 111.11.111.11
         - 111.11.111.12
-      - network: ext1
+      - network: wan2
         address:
         - 222.22.222.10
         - 222.22.222.11
         - 222.22.222.12
-      - network: int0
+      - network: lan1
         address:
         - 192.168.10.1
-      - network: int1
+      - network: lan2
         address:
         - 192.168.20.1
     startup: |
@@ -85,21 +86,21 @@ hosts:
       EOF
   node00:
     interfaces:
-      - network: int0
+      - network: lan1
         address:
         - 192.168.10.101
   node01:
     interfaces:
-      - network: int0
+      - network: lan1
         address:
         - 192.168.10.102
   node10:
     interfaces:
-      - network: int1
+      - network: lan2
         address:
         - 192.168.20.201
   node11:
     interfaces:
-      - network: int1
+      - network: lan2
         address:
         - 192.168.20.202

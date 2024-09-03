@@ -1,0 +1,15 @@
+# connect device eth0 to network "internet"
+ip addr add 100.64.64.100/24 dev eth0
+
+# routes
+ip route add default via 100.64.64.1
+
+# common startup commands
+cat /shared/hosts >> /etc/hosts
+echo 100.64.64.100 remotehost >> /etc/hosts
+
+
+# host startup commands
+ip route add 111.11.111.0/28 via 100.64.64.11
+ip route add 222.22.222.8/29 via 100.64.64.22
+

@@ -1,0 +1,13 @@
+# connect device eth0 to network "wan1"
+ip addr add 111.11.111.1/28 dev eth0
+# connect device eth1 to network "internet"
+ip addr add 100.64.64.11/24 dev eth1
+
+# routes
+ip route add default via 111.11.111.1
+ip route add default via 100.64.64.1
+
+# common startup commands
+cat /shared/hosts >> /etc/hosts
+echo 100.64.64.100 remotehost >> /etc/hosts
+

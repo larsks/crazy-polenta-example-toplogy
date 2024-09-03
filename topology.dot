@@ -1,24 +1,28 @@
-graph {
-    node00 [shape=box];
-    node01 [shape=box];
-    node10 [shape=box];
-    node11 [shape=box];
-    router [shape=box];
-    isprouter111 [shape=box];
-    isprouter222 [shape=box];
-    remotehost [shape=box];
-
-    node00 -- net_int0;
-    node01 -- net_int0;
-    node10 -- net_int1;
-    node11 -- net_int1;
-    net_int0 -- router;
-    net_int1 -- router;
-    router -- net_ext0;
-    router -- net_ext1;
-    net_ext0 -- isprouter111;
-    net_ext1 -- isprouter222;
-    isprouter111 -- internet;
-    isprouter222 -- internet;
-    internet -- remotehost;
-  }
+strict graph  {
+wan1;
+wan2;
+internet;
+lan1;
+lan2;
+remotehost [shape=box];
+isprouter111 [shape=box];
+isprouter222 [shape=box];
+router [shape=box];
+node00 [shape=box];
+node01 [shape=box];
+node10 [shape=box];
+node11 [shape=box];
+wan1 -- isprouter111;
+wan1 -- router;
+wan2 -- isprouter222;
+wan2 -- router;
+internet -- remotehost;
+internet -- isprouter111;
+internet -- isprouter222;
+lan1 -- router;
+lan1 -- node00;
+lan1 -- node01;
+lan2 -- router;
+lan2 -- node10;
+lan2 -- node11;
+}

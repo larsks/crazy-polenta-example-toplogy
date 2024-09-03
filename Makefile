@@ -1,3 +1,5 @@
+DOT = dot
+
 TOPOLOGY = topology.yaml
 
 STARTUP_SCRIPTS = \
@@ -14,15 +16,15 @@ DIAGRAMS = \
 	topology.svg \
 	topology.png
 
-all: $(STARTUP_SCRIPTS) lab.conf $(DIAGRAMS)
+all: $(STARTUP_SCRIPTS) lab.conf $(DIAGRAMS) topology.dot
 
 topology.svg: topology.dot
-	dot -o $@ -T svg $<
+	$(DOT) -o $@ -T svg $<
 
 topology.png: topology.dot
-	dot -o $@ -T png $<
+	$(DOT) -o $@ -T png $<
 
-$(STARTUP_SCRIPTS) lab.conf: $(TOPOLOGY)
+$(STARTUP_SCRIPTS) lab.conf topology.dot: $(TOPOLOGY)
 	makelab $(TOPOLOGY)
 
 clean:
